@@ -36,7 +36,7 @@ export const ProductsProvider = ({ children }) => {
     dispatch({ type: SIDEBAR_CLOSE });
   };
 
-  const fetchProducts = async (url) => {
+  const fetchProducts = async (url:string) => {
     dispatch({ type: GET_PRODUCTS_BEGIN });
     try {
       let products = [];
@@ -48,7 +48,7 @@ export const ProductsProvider = ({ children }) => {
       dispatch({ type: GET_PRODUCTS_ERROR });
     }
   };
-  const fetchSingleProduct = async (url) => {
+  const fetchSingleProduct = async (url:string) => {
     dispatch({ type: GET_SINGLE_PRODUCT_BEGIN });
     try {
       const response = await axios.get(url);

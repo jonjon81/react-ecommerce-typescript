@@ -1,4 +1,5 @@
 import Logo from './Logo';
+import {useState} from 'react';
 import { Link } from 'react-router-dom';
 import { useProductsContext } from '../context/products_context';
 import { FaTimes, FaChevronRight, FaChevronLeft } from 'react-icons/fa';

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { services } from '../utils/constants';
 import { useInView } from 'framer-motion';
+import {useRef} from 'react';
 
 const Services = () => {
   const ref = useRef(null);
