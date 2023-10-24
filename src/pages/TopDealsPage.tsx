@@ -1,10 +1,9 @@
-import React from 'react';
 import styled from 'styled-components';
 import { Filters, TopDealsList, SortDeals, PageHero } from '../components';
 const TopDealsPage = () => {
   return (
     <main>
-      <PageHero title="top deals" />
+      <PageHero title="top deals" product={''} category={''} />
       <Wrapper className="page">
         <div className="section-center products">
           <Filters />

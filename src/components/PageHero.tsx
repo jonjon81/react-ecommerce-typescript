@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { scrollTop } from '../utils/helpers';
 
-const PageHero = ({ title, product, category }) => {
+const PageHero = ({ title, product, category }: { title:string; product:string; category:string}) => {
   return (
     <Wrapper>
       <div className="section-center">

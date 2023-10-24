@@ -1,15 +1,15 @@
-export const formatPrice = (number) => {
+export const formatPrice = (number:number) => {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
   }).format(number);
 };
 
-export const discountPercent = (number) => {
+export const discountPercent = (number:number) => {
   return Math.round(number);
 };
 
-export const discountedPrice = (oldprice, discount) => {
+export const discountedPrice = (oldprice:number, discount:number) => {
   let newNumber = oldprice - oldprice * (discountPercent(discount) / 100);
   return formatPrice(newNumber);
 };
