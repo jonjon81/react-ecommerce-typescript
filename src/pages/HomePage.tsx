@@ -1,4 +1,3 @@
-import React from 'react';
 import { FeaturedProducts, Deals, CategoryProducts, Hero, Services, Contact } from '../components';
 const HomePage = () => {
   return (
