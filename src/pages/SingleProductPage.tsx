@@ -1,13 +1,15 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useProductsContext } from '../context/products_context';
 import { single_product_url as url } from '../utils/constants';
 import { formatPrice, discountedPrice, scrollTop } from '../utils/helpers';
-import {} from '../utils/helpers';
 import { Loading, Error, ProductImages, Rating, PageHero, AddToCart } from '../components';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-const SingleProductPage = () => {
+
+interface SingleProductPageProps {}
+
+const SingleProductPage: React.FC<SingleProductPageProps> = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const {
@@ -124,6 +126,6 @@ const Wrapper = styled.main`
       font-size: 1.25rem;
     }
   }
-`;
+};`
 
 export default SingleProductPage;

@@ -1,6 +1,12 @@
+import { FC } from 'react';
 import styled from 'styled-components';
 import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';
-const Rating = ( rating:number ) => {
+
+interface RatingProps {
+  rating: number;
+}
+
+const Rating: FC<RatingProps> = ({ rating }) => {
   const tempStars = Array.from({ length: 5 }, (_, index) => {
     const number = index + 0.5;
     return <span key={index}>{rating > number ? <BsStarFill /> : rating > index ? <BsStarHalf /> : <BsStar />}</span>;
@@ -27,4 +33,5 @@ const Wrapper = styled.div`
   }
   margin-bottom: 0.5rem;
 `;
+
 export default Rating;

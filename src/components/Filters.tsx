@@ -1,9 +1,10 @@
+import { FC, useState } from 'react';
 import styled from 'styled-components';
 import { useFilterContext } from '../context/filter_context';
 import { getUniqueValues, formatPrice } from '../utils/helpers';
 import { FaCog, FaTimes } from 'react-icons/fa';
 
-const Filters = () => {
+const Filters: FC = () => {
   const {
     filters: { text, category, brand, min_price, price, max_price },
     updateFilters,
@@ -11,24 +12,24 @@ const Filters = () => {
     clearFilters,
   } = useFilterContext();
 
-  const [isActive, setActive] = useState('false');
+  const [isActive, setActive] = useState<boolean>(false);
 
   const handleFilterToggle = () => {
     setActive(!isActive);
   };
 
-  let searchValue = document.querySelector('.-search-bar input');
-  let clearButton = document.querySelector('.clearButton');
+  let searchValue: HTMLInputElement | null = document.querySelector('.-search-bar input');
+  let clearButton: HTMLButtonElement | null = document.querySelector('.clearButton');
   if (searchValue) {
     if (searchValue.defaultValue.length > 0) {
-      clearButton.classList.add('active');
+      clearButton?.classList.add('active');
     } else {
-      clearButton.classList.remove('active');
+      clearButton?.classList.remove('active');
     }
   }
 
-  const categories = getUniqueValues(all_products, 'category');
-  const companies = getUniqueValues(all_products, 'brand');
+  const categories: string[] = getUniqueValues(all_products, 'category');
+  const companies: string[] = getUniqueValues(all_products, 'brand');
 
   return (
     <Wrapper className="filter-wrapper">
@@ -62,7 +63,7 @@ const Filters = () => {
                 category <span className="category-message">(Scroll down for more)</span>
               </h5>
               <div className="category-list-holder">
-                {categories.map((c, index) => {
+                {categories.map((c: string, index: number) => {
                   return (
                     <button
                       key={index}
@@ -82,7 +83,7 @@ const Filters = () => {
             <div className="form-control -brand">
               <h5>brand</h5>
               <select name="brand" value={brand} onChange={updateFilters} className="brand">
-                {companies.map((c, index) => {
+                {companies.map((c: string, index: number) => {
                   return (
                     <option key={index} value={c}>
                       {c}
