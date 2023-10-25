@@ -2,7 +2,7 @@ import { FeaturedProducts, Deals, CategoryProducts, Hero, Services, Contact } fr
 const HomePage = () => {
   return (
     <main>
-      {/* <Hero /> */}
+      <Hero />
       <FeaturedProducts />
       <Deals />
       <CategoryProducts />
