@@ -41,7 +41,7 @@ const AboutPage = () => {
   const isInView2 = useInView(ref2, { once: true });
   return (
     <main>
-      <PageHero title="about" />
+      <PageHero title="about"/>
       <Wrapper className="page section section-center">
         <div className="main-section">
           <img src={laptops} alt="nice desk" />
