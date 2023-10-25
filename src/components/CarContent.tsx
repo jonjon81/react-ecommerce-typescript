@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 import CartColumns from './CartColumns';
 import CartItem from './CartItem';
 import CartTotals from './CartTotals';
-
-const CartItems = (): JSX.Element => {
+const CartItems = () => {
   const { cart, clearCart } = useCartContext();
+
   return (
     <Wrapper className="section section-center">
       <CartColumns />
-      {cart.map((item: any) => {
+      {cart.map((item) => {
         return <CartItem key={item.id} {...item} />;
       })}
       <hr />
@@ -27,7 +27,6 @@ const CartItems = (): JSX.Element => {
     </Wrapper>
   );
 };
-
 const Wrapper = styled.section`
   .link-container {
     display: flex;
@@ -50,7 +49,16 @@ const Wrapper = styled.section`
     padding: 10px;
     font-weight: bold;
     background: #fff;
+    border: 2px solid var(--clr-red-dark);
+    text-align: center;
+    color: var(--clr-red-dark);
+  }
+  .clear-btn {
+    background: var(--clr-black);
+    font-size: 1rem;
+    @media (max-width: 776px) {
+      font-size: 0.875rem;
+    }
   }
 `;
-
 export default CartItems;

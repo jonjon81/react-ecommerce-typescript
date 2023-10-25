@@ -4,12 +4,10 @@ import styled from 'styled-components';
 import { useProductsContext } from '../context/products_context';
 import { useCartContext } from '../context/cart_context';
 import { useUserContext } from '../context/user_context';
-
-const CartButton = (): JSX.Element => {
+const CartButton = () => {
   const { closeSidebar } = useProductsContext();
   const { total_items, clearCart } = useCartContext();
   const { loginWithRedirect, myUser, logout } = useUserContext();
-
   return (
     <Wrapper className="cart-btn-wrapper">
       <Link to="/cart" className="cart-btn" onClick={closeSidebar}>
@@ -47,20 +45,50 @@ const Wrapper = styled.div`
   width: 225px;
 
   .cart-btn {
-    // CSS styles
-  }
+    color: #fff;
+    font-size: 1.5rem;
+    letter-spacing: var(--spacing);
+    display: flex;
 
+    align-items: center;
+  }
   .cart-container {
-    // CSS styles
+    display: flex;
+    align-items: center;
+    position: relative;
+    svg {
+      height: 1.6rem;
+      margin-left: 5px;
+      color: #fff;
+    }
   }
-
   .cart-value {
-    // CSS styles
+    position: absolute;
+    top: -10px;
+    right: -16px;
+    background: var(--clr-yellow-dark);
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    color: var(--clr-white);
+    padding: 12px;
   }
-
   .auth-btn {
-    // CSS styles
+    display: flex;
+    align-items: center;
+    background: transparent;
+    border-color: transparent;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #fff;
+    letter-spacing: var(--spacing);
+    svg {
+      margin-left: 5px;
+    }
   }
 `;
-
 export default CartButton;

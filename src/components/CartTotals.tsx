@@ -1,16 +1,20 @@
+import { FC } from 'react';
 import styled from 'styled-components';
 import { useCartContext } from '../context/cart_context';
 import { useUserContext } from '../context/user_context';
 import { formatPrice } from '../utils/helpers';
 import { Link } from 'react-router-dom';
-const CartTotals = () => {
+
+interface CartTotalsProps {}
+
+const CartTotals: FC<CartTotalsProps> = () => {
   const { total_amount, shipping_fee } = useCartContext();
   const { myUser, loginWithRedirect } = useUserContext();
 
-  let updatedShipFee = formatPrice(shipping_fee);
-  let updatedTotaAmount = formatPrice(total_amount + shipping_fee);
+  let updatedShipFee: string = formatPrice(shipping_fee);
+  let updatedTotaAmount: string = formatPrice(total_amount + shipping_fee);
   if (total_amount > 50) {
-    updatedShipFee = 0.0;
+    updatedShipFee = '0.0';
     updatedTotaAmount = formatPrice(total_amount);
   }
   return (
