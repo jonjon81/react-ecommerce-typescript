@@ -4,7 +4,16 @@ import { discountPercent, discountedPrice, scrollTop } from '../utils/helpers';
 import { FaSistrix } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
-const Product = ({ thumbnail, title, price, id, category, discountPercentage }) => {
+interface ProductProps {
+  thumbnail: string;
+  title: string;
+  price: number;
+  id: string;
+  category: string;
+  discountPercentage: number;
+}
+
+const Product: React.FC<ProductProps> = ({ thumbnail, title, price, id, category, discountPercentage }) => {
   return (
     <Wrapper>
       <div className="container">
@@ -22,6 +31,7 @@ const Product = ({ thumbnail, title, price, id, category, discountPercentage }) 
     </Wrapper>
   );
 };
+
 const Wrapper = styled.article`
   .container {
     position: relative;
@@ -110,4 +120,5 @@ const Wrapper = styled.article`
     }
   }
 `;
+
 export default Product;

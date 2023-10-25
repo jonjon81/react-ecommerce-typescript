@@ -1,25 +1,33 @@
-import { useState } from 'react';
+import { FC, useState, MouseEvent } from 'react';
 import styled from 'styled-components';
 import { FaWindowClose } from 'react-icons/fa';
-const ProductImages = ({ images = [[]] }) => {
-  const [main, setMain] = useState(images[0]);
-  const [isActive, setIsActive] = useState(false);
-  let vpWidth = window.innerWidth;
-  let modalBg = document.querySelector('.modal-background');
-  const imageModalActive = () => {
+
+interface ProductImagesProps {
+  images: string[][];
+}
+
+const ProductImages: FC<ProductImagesProps> = ({ images = [[]] }) => {
+  const [main, setMain] = useState<string>(images[0][0]);
+  const [isActive, setIsActive] = useState<boolean>(false);
+  let vpWidth: number = window.innerWidth;
+  let modalBg: HTMLElement | null = document.querySelector('.modal-background');
+
+  const imageModalActive = (): void => {
     vpWidth = window.innerWidth;
     if (vpWidth > 992) {
       setIsActive(true);
-      modalBg.classList.add('active');
+      modalBg?.classList.add('active');
     }
   };
-  const closeActiveModal = () => {
+
+  const closeActiveModal = (): void => {
     setIsActive(false);
-    modalBg.classList.remove('active');
+    modalBg?.classList.remove('active');
   };
-  modalBg.addEventListener(
+
+  modalBg?.addEventListener(
     'click',
-    function (event) {
+    function (event: MouseEvent) {
       event.preventDefault();
       closeActiveModal();
     },
@@ -32,16 +40,18 @@ const ProductImages = ({ images = [[]] }) => {
       <FaWindowClose className="close-image-modal" onClick={closeActiveModal} />
       <img src={main} alt="" className="main" onClick={imageModalActive} />
       <div className="gallery">
-        {images.map((image, index) => {
-          return (
-            <img
-              src={image}
-              alt=""
-              key={index}
-              className={`${image === main ? 'active' : null}`}
-              onClick={() => setMain(images[index])}
-            />
-          );
+        {images.map((imageRow, rowIndex) => {
+          return imageRow.map((image, index) => {
+            return (
+              <img
+                src={image}
+                alt=""
+                key={index}
+                className={`${image === main ? 'active' : ''}`}
+                onClick={() => setMain(images[rowIndex][index])}
+              />
+            );
+          });
         })}
       </div>
     </Wrapper>
@@ -126,6 +136,6 @@ const Wrapper = styled.section`
       }
     }
   }
-`;
+};`
 
 export default ProductImages;
