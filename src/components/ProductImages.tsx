@@ -7,7 +7,7 @@ interface ProductImagesProps {
 }
 
 const ProductImages: FC<ProductImagesProps> = ({ images = [[]] }) => {
-  const [main, setMain] = useState<string>(images[0][0]);
+  const [main, setMain] = useState<string>(images[0]);
   const [isActive, setIsActive] = useState<boolean>(false);
   let vpWidth: number = window.innerWidth;
   let modalBg: HTMLElement | null = document.querySelector('.modal-background');
@@ -40,7 +40,7 @@ const ProductImages: FC<ProductImagesProps> = ({ images = [[]] }) => {
       <FaWindowClose className="close-image-modal" onClick={closeActiveModal} />
       <img src={main} alt="" className="main" onClick={imageModalActive} />
       <div className="gallery">
-        {images.map((imageRow, rowIndex) => {
+        {/* {images.map((imageRow, rowIndex) => {
           return imageRow.map((image, index) => {
             return (
               <img
@@ -52,7 +52,7 @@ const ProductImages: FC<ProductImagesProps> = ({ images = [[]] }) => {
               />
             );
           });
-        })}
+        })} */}
       </div>
     </Wrapper>
   );
