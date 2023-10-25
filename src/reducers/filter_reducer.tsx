@@ -9,9 +9,32 @@ import {
   CLEAR_FILTERS,
 } from '../actions';
 
-const filter_reducer = (state, action) => {
+interface Product {
+  title: string;
+  price: number;
+  category: string;
+  brand: string;
+  shipping: boolean;
+}
+
+interface FilterState {
+  all_products: Product[];
+  filtered_products: Product[];
+  filters: {
+    max_price: number;
+    price: number;
+    text: string;
+    category: string;
+    brand: string;
+    shipping: boolean;
+  };
+  grid_view: boolean;
+  sort: string;
+}
+
+const filter_reducer = (state: FilterState, action: { type: string; payload?: any }): FilterState => {
   if (action.type === LOAD_PRODUCTS) {
-    let maxPrice = action.payload.map((p) => p.price);
+    let maxPrice = action.payload.map((p: Product) => p.price);
     maxPrice = Math.max(...maxPrice);
     return {
       ...state,
@@ -31,7 +54,7 @@ const filter_reducer = (state, action) => {
   }
   if (action.type === SORT_PRODUCTS) {
     const { sort, filtered_products } = state;
-    let tempProducts = [];
+    let tempProducts: Product[] = [];
     if (sort === 'price-lowest') {
       tempProducts = filtered_products.sort((a, b) => {
         return a.price - b.price;
@@ -62,7 +85,7 @@ const filter_reducer = (state, action) => {
   if (action.type === FILTER_PRODUCTS) {
     const { all_products } = state;
     const { text, category, brand, price, shipping } = state.filters;
-    let tempProducts = [...all_products];
+    let tempProducts: Product[] = [...all_products];
     if (text) {
       tempProducts = tempProducts.filter((product) => product.title.toLowerCase().includes(text.toLowerCase()));
     }

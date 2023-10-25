@@ -9,7 +9,24 @@ import {
   GET_SINGLE_PRODUCT_ERROR,
 } from '../actions';
 
-const products_reducer = (state, action) => {
+interface Product {
+  id: number;
+  name: string;
+  featured: boolean;
+}
+
+interface State {
+  isSidebarOpen: boolean;
+  products_loading: boolean;
+  products_error: boolean;
+  single_product_loading: boolean;
+  single_product_error: boolean;
+  products: Product[];
+  featured_products: Product[];
+  single_product: Product | null;
+}
+
+const products_reducer = (state: State, action: { type: string; payload?: Product[] | Product }) => {
   if (action.type === SIDEBAR_OPEN) {
     return { ...state, isSidebarOpen: true };
   }
@@ -21,12 +38,11 @@ const products_reducer = (state, action) => {
     return { ...state, products_loading: true };
   }
   if (action.type === GET_PRODUCTS_SUCCESS) {
-    // const featured_products = action.payload.filter((product) => product.featured === true);
     return {
       ...state,
       products_loading: false,
-      products: action.payload,
-      featured_products: action.payload,
+      products: action.payload || [],
+      featured_products: action.payload || [],
     };
   }
   if (action.type === GET_PRODUCTS_ERROR) {
@@ -43,7 +59,7 @@ const products_reducer = (state, action) => {
     return {
       ...state,
       single_product_loading: false,
-      single_product: action.payload,
+      single_product: action.payload || null,
     };
   }
   if (action.type === GET_SINGLE_PRODUCT_ERROR) {

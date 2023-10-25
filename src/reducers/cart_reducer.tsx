@@ -1,6 +1,29 @@
-import { ADD_TO_CART, CLEAR_CART, COUNT_CART_TOTALS, REMOVE_CART_ITEM, TOGGLE_CART_ITEM_AMOUNT } from '../actions';
+import {
+  ADD_TO_CART,
+  CLEAR_CART,
+  COUNT_CART_TOTALS,
+  REMOVE_CART_ITEM,
+  TOGGLE_CART_ITEM_AMOUNT,
+} from "../actions";
 
-const cart_reducer = (state, action) => {
+interface CartItem {
+  id: string;
+  name: string;
+  amount: number;
+  image: string;
+  price: number;
+  max: number;
+  category: string;
+  discountPercentage: number;
+}
+
+interface CartState {
+  cart: CartItem[];
+  total_items: number;
+  total_amount: number;
+}
+
+const cart_reducer = (state: CartState, action: any): CartState => {
   if (action.type === ADD_TO_CART) {
     const { id, amount, product } = action.payload;
     const tempItem = state.cart.find((i) => i.id === id);
@@ -18,7 +41,7 @@ const cart_reducer = (state, action) => {
       });
       return { ...state, cart: tempCart };
     } else {
-      const newItem = {
+      const newItem: CartItem = {
         id: id,
         name: product.title,
         amount,
@@ -39,14 +62,14 @@ const cart_reducer = (state, action) => {
     const { id, value } = action.payload;
     const tempCart = state.cart.map((item) => {
       if (item.id === id) {
-        if (value === 'inc') {
+        if (value === "inc") {
           let newAmount = item.amount + 1;
           if (newAmount > item.max) {
             newAmount = item.max;
           }
           return { ...item, amount: newAmount };
         }
-        if (value === 'dec') {
+        if (value === "dec") {
           let newAmount = item.amount - 1;
           if (newAmount < 1) {
             newAmount = 1;
@@ -63,10 +86,11 @@ const cart_reducer = (state, action) => {
   }
   if (action.type === COUNT_CART_TOTALS) {
     const { total_items, total_amount } = state.cart.reduce(
-      (total, cartItem) => {
+      (total: any, cartItem: CartItem) => {
         const { amount, price, discountPercentage } = cartItem;
         total.total_items += amount;
-        total.total_amount += price * amount * (1 - discountPercentage / 100).toFixed(2);
+        total.total_amount +=
+          price * amount * (1 - discountPercentage / 100).toFixed(2);
         return total;
       },
       { total_items: 0, total_amount: 0 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useReducer } from 'react';
+import React, { useEffect, useContext, useReducer, FC } from 'react';
 import reducer from '../reducers/filter_reducer';
 import {
   LOAD_PRODUCTS,
@@ -12,7 +12,27 @@ import {
 } from '../actions';
 import { useProductsContext } from './products_context';
 
-const initialState = {
+interface FilterState {
+  filtered_products: any[];
+  all_products: any[];
+  grid_view: boolean;
+  sort: string;
+  filters: {
+    text: string;
+    brand: string;
+    category: string;
+    min_price: number;
+    max_price: number;
+    price: number;
+    shipping: boolean;
+  };
+}
+
+interface FilterProviderProps {
+  children: React.ReactNode;
+}
+
+const initialState: FilterState = {
   filtered_products: [],
   all_products: [],
   grid_view: true,
@@ -28,9 +48,9 @@ const initialState = {
   },
 };
 
-const FilterContext = React.createContext();
+const FilterContext = React.createContext<any>(null);
 
-export const FilterProvider = ({ children }) => {
+export const FilterProvider: FC<FilterProviderProps> = ({ children }) => {
   const { products } = useProductsContext();
   const [state, dispatch] = useReducer(reducer, initialState);
   useEffect(() => {
@@ -48,23 +68,18 @@ export const FilterProvider = ({ children }) => {
   const setListView = () => {
     dispatch({ type: SET_LISTVIEW });
   };
-  const updateSort = (e) => {
-    // just for demonstration;
-    // const name = e.target.name
+  const updateSort = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
     dispatch({ type: UPDATE_SORT, payload: value });
   };
-  const updateFilters = (e) => {
-    let name = e.target.name;
-    let value = e.target.value;
+  const updateFilters = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
+    let name: string = e.target.name;
+    let value: string | null | number = e.target.value;
     if (name === 'category') {
       value = e.target.textContent;
     }
     if (name === 'price') {
       value = Number(value);
-    }
-    if (name === 'shipping') {
-      value = e.target.checked;
     }
     dispatch({ type: UPDATE_FILTERS, payload: { name, value } });
   };

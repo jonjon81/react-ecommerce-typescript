@@ -1,10 +1,11 @@
+import { FC } from 'react';
 import styled from 'styled-components';
 import { PageHero, StripeCheckout } from '../components';
 import { scrollTop } from '../utils/helpers';
 import { useCartContext } from '../context/cart_context';
 import { Link } from 'react-router-dom';
 
-const CheckoutPage = () => {
+const CheckoutPage: FC = () => {
   const { cart } = useCartContext();
 
   return (
@@ -25,6 +26,7 @@ const CheckoutPage = () => {
     </main>
   );
 };
+
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
@@ -33,4 +35,5 @@ const Wrapper = styled.div`
     text-align: center;
   }
 `;
+
 export default CheckoutPage;
