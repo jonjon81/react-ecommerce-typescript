@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { FaWindowClose } from 'react-icons/fa';
 
 interface ProductImagesProps {
-  images: string[][];
+  images: string[];
 }
 
 const ProductImages: FC<ProductImagesProps> = ({ images = [[]] }) => {
@@ -40,19 +40,17 @@ const ProductImages: FC<ProductImagesProps> = ({ images = [[]] }) => {
       <FaWindowClose className="close-image-modal" onClick={closeActiveModal} />
       <img src={main} alt="" className="main" onClick={imageModalActive} />
       <div className="gallery">
-        {/* {images.map((imageRow, rowIndex) => {
-          return imageRow.map((image, index) => {
+        {images.map((image, index) => {
             return (
               <img
                 src={image}
                 alt=""
                 key={index}
                 className={`${image === main ? 'active' : ''}`}
-                onClick={() => setMain(images[rowIndex][index])}
+                onClick={() => setMain(images[index])}
               />
             );
-          });
-        })} */}
+        })}
       </div>
     </Wrapper>
   );
