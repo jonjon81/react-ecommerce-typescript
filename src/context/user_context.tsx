@@ -1,10 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useAuth0, Auth0User } from '@auth0/auth0-react';
+import { useAuth0 } from '@auth0/auth0-react';
+
+interface User {
+  name: string;
+  email: string;
+}
 
 interface UserContextProps {
   loginWithRedirect: () => void;
   logout: () => void;
-  myUser: Auth0User | null;
+  myUser: User | null;
   isLoading: boolean;
   error: any;
 }
@@ -13,7 +18,7 @@ const UserContext = React.createContext<UserContextProps | undefined>(undefined)
 
 export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { loginWithRedirect, logout, user, isLoading, error } = useAuth0();
-  const [myUser, setMyUser] = useState<Auth0User | null>(null);
+  const [myUser, setMyUser] = useState<User | null>(null);
 
   useEffect(() => {
     setMyUser(user);
